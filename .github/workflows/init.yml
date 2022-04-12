@@ -34,4 +34,4 @@ jobs:
         env:
           SPLUNK_PASS: ${{ secrets.SPLUNK_PASS }}
         run: |
-          sudo -u splunk /opt/splunk/bin/splunk list cluster-peers -auth admin:$SPLUNK_PASS
+          sudo -u splunk /opt/splunk/bin/splunk list cluster-config -auth admin:$SPLUNK_PASS
