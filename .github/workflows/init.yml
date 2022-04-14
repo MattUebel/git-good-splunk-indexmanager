@@ -31,3 +31,4 @@ jobs:
           SPLUNK_PASS: ${{ secrets.SPLUNK_PASS }}
         run: |
           ls -lah
+          pwd
