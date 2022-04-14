@@ -30,6 +30,5 @@ jobs:
         env:
           SPLUNK_PASS: ${{ secrets.SPLUNK_PASS }}
         run: |
-          ls -lah
-          pwd
-          whoami
+          # run link_new_apps.sh as root
+          sudo -u root /bin/bash -c "./link_new_apps.sh"
