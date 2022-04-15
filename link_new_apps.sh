@@ -3,7 +3,7 @@
 SPLUNK_ETC_DIR="/opt/splunk/etc/master-apps"
 SPLUNK_DEPLOYS_DIR="/opt/splunk_deploys"
 NEW_DEPLOY_DIR="$SPLUNK_DEPLOYS_DIR/$(date +%Y%m%d%H%M%S)"
-OLD_DIRECTORIES_TO_PRESERVER="5"
+OLD_DIRECTORIES_TO_PRESERVE=5
 
 # exit if SPLUNK_ETC_DIR is not a symlink
 if [ ! -L $SPLUNK_ETC_DIR ]; then
@@ -30,5 +30,4 @@ chown -R splunk:splunk $SPLUNK_DEPLOYS_DIR
 chown -R splunk:splunk $SPLUNK_ETC_DIR
 
 # delete all but the last $OLD_DIRECTORIES_TO_PRESERVER directories in SPLUNK_DEPLOYS_DIR
-ls -t $SPLUNK_DEPLOYS_DIR | tail -n +$OLD_DIRECTORIES_TO_PRESERVER | xargs rm -rf
-
+ls -dt $SPLUNK_DEPLOYS_DIR/* | tail -n +$(($OLD_DIRECTORIES_TO_PRESERVE + 1)) | xargs rm -rf
