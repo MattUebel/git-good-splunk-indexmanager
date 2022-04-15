@@ -31,3 +31,5 @@ jobs:
           SPLUNK_PASS: ${{ secrets.SPLUNK_PASS }}
         run: |
           sudo -u root /bin/bash -c "cd $GITHUB_WORKSPACE && ./link_new_apps.sh"
+          sudo -u splunk /opt/splunk/bin/splunk apply cluster-bundle -auth admin:$SPLUNK_PASS
+          sudo -u splunk /opt/splunk/bin/splunk show cluster-bundle-status -auth admin:$SPLUNK_PASS
