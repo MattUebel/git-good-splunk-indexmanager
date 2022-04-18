@@ -7,6 +7,7 @@ WARNING_THRESHOLD = 864000
 EXIT_CODE = 0
 ERROR_MESSAGES = []
 WARNING_MESSAGES = []
+OUTPUT_FILE = output.txt
 
 # recursively find all .conf files in the app directory
 config_files = []
@@ -31,19 +32,22 @@ for file in config_files:
                     f"{file} has a frozenTimePeriodInSecs of {frozenTimePeriodInSecs} which is less than the recommended value of {WARNING_THRESHOLD}"
                 )
 
-if EXIT_CODE > 0:
-    print(
-        f"::error:{len(ERROR_MESSAGES)} {'error' if len(ERROR_MESSAGES) == 1 else 'errors'} found"
-    )
-    for message in ERROR_MESSAGES:
-        print(f"::error::{message}")
-else:
-    print("::success::No errors found")
-if WARNING_MESSAGES:
-    print(
-        f"::warning::{len(WARNING_MESSAGES)} {'warning' if len(WARNING_MESSAGES) == 1 else 'warnings'} found"
-    )
-    for message in WARNING_MESSAGES:
-        print(f"::warning::{message}")
+with open(OUTPUT_FILE, "w") as f:
+    if EXIT_CODE > 0:
+        print(
+            f"::error::{len(ERROR_MESSAGES)} {'error' if len(ERROR_MESSAGES) == 1 else 'errors'} found",
+            file=f,
+        )
+        for message in ERROR_MESSAGES:
+            print(f"::error::{message}", file=f)
+    else:
+        print("::success::No errors found", file=f)
+    if WARNING_MESSAGES:
+        print(
+            f"::warning::{len(WARNING_MESSAGES)} {'warning' if len(WARNING_MESSAGES) == 1 else 'warnings'} found",
+            file=f,
+        )
+        for message in WARNING_MESSAGES:
+            print(f"::warning::{message}", file=f)
 
 sys.exit(EXIT_CODE)

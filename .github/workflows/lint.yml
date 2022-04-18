@@ -28,9 +28,23 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Lint config
+        id: lc
         env:
           SPLUNK_PASS: ${{ secrets.SPLUNK_PASS }}
         run: |
           python lint.py
+          body=$(cat output.txt)
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'%0A'}"
+          body="${body//$'\r'/'%0D'}"
+          echo "::set-output name=body::$body"
+      - name: Write comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue_number: ${{ github.event.pull_request.number }}
+          body: |
+            ## Lint results
+            ${{ steps.lc.outputs.body }}
+
           
           
