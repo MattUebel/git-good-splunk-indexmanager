@@ -34,10 +34,13 @@ for file in config_files:
 if EXIT_CODE > 0:
     for message in ERROR_MESSAGES:
         print(f"::error::{message}")
-    sys.exit(EXIT_CODE)
 else:
     print("::success::No errors found")
     if WARNING_MESSAGES:
+        print(
+            f"::warning::however, {len(WARNING_MESSAGES)} {'warning' if len(WARNING_MESSAGES) == 1 else 'warnings'} found"
+        )
         for message in WARNING_MESSAGES:
             print(f"::warning::{message}")
-    sys.exit(EXIT_CODE)
+
+sys.exit(EXIT_CODE)
