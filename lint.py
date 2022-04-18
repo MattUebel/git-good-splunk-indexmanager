@@ -33,21 +33,23 @@ for file in config_files:
                 )
 
 with open(OUTPUT_FILE, "w") as f:
-    if EXIT_CODE > 0:
+    if ERROR_MESSAGES:
         print(
-            f"::error::{len(ERROR_MESSAGES)} {'error' if len(ERROR_MESSAGES) == 1 else 'errors'} found",
+            f"::error::{len(ERROR_MESSAGES)} {'error' if len(ERROR_MESSAGES) == 1 else 'errors'} found"
+            + "\n",
             file=f,
         )
         for message in ERROR_MESSAGES:
-            print(f"::error::{message}", file=f)
+            print(f"::error::{message}" + "\n", file=f)
     else:
-        print("::success::No errors found", file=f)
+        print("::success::No errors found" + "\n", file=f)
     if WARNING_MESSAGES:
         print(
             f"::warning::{len(WARNING_MESSAGES)} {'warning' if len(WARNING_MESSAGES) == 1 else 'warnings'} found",
+            +"\n",
             file=f,
         )
         for message in WARNING_MESSAGES:
-            print(f"::warning::{message}", file=f)
+            print(f"::warning::{message}" + "\n", file=f)
 
 sys.exit(EXIT_CODE)
