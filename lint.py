@@ -22,7 +22,7 @@ for file in config_files:
         if config.has_option(section, "frozenTimePeriodInSecs"):
             frozenTimePeriodInSecs = config.getint(section, "frozenTimePeriodInSecs")
             if frozenTimePeriodInSecs < ALERT_THRESHOLD:
-                EXIT_MESSAGES.append(
+                ERROR_MESSAGES.append(
                     f"{file} has a frozenTimePeriodInSecs of {frozenTimePeriodInSecs} which is less than the required value of {ALERT_THRESHOLD}"
                 )
                 EXIT_CODE += 1
