@@ -34,22 +34,12 @@ for file in config_files:
 
 with open(OUTPUT_FILE, "w") as f:
     if ERROR_MESSAGES:
-        print(
-            f"{len(ERROR_MESSAGES)} {'error' if len(ERROR_MESSAGES) == 1 else 'errors'} found"
-            + "\n",
-            file=f,
-        )
         for message in ERROR_MESSAGES:
-            print(f"{message}" + "\n", file=f)
+            file.write(message + "\n")
     else:
-        print("No errors found" + "\n", file=f)
+        file.write("No errors found\n")
     if WARNING_MESSAGES:
-        print(
-            f"{len(WARNING_MESSAGES)} {'warning' if len(WARNING_MESSAGES) == 1 else 'warnings'} found",
-            +"\n",
-            file=f,
-        )
         for message in WARNING_MESSAGES:
-            print(f"{message}" + "\n", file=f)
+            file.write(message + "\n")
 
 sys.exit(EXIT_CODE)
