@@ -38,5 +38,5 @@ with open(OUTPUT_FILE, "w") as f:
     else:
         f.write("### No errors found! :tada:\n")
     if WARNING_MESSAGES:
-        f.write("\n### Warnings :warning:\n")
+        f.write("### Warnings :warning:\n")
         f.write("\n".join(WARNING_MESSAGES))
