@@ -42,7 +42,7 @@ jobs:
       - name: Write comment
         uses: peter-evans/create-or-update-comment@v2
         with:
-          issue_number: ${{ github.event.pull_request.number }}
+          issue-number: ${{ github.event.pull_request.number }}
           body: |
             ## Lint results
             ${{ steps.lc.outputs.body }}
