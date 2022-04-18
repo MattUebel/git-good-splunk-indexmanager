@@ -47,7 +47,7 @@ jobs:
             ## Lint results
             ${{ steps.lc.outputs.body }}
       - name: check for lint failure
-        if: steps.lc.result == 'failure'
+        if: steps.lc.outcome == 'failure'
         run: |
           exit 1
 
