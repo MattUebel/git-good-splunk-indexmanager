@@ -23,7 +23,8 @@ jobs:
         with:
           python-version: "3.8"
           cache: 'pipenv'
-      - run: python --version
+      - run: pip install pipenv
+      - run: pipenv install
 
       # Runs a set of commands using the runners shell
       - name: Lint config
