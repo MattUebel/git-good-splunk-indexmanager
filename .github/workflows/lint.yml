@@ -39,9 +39,17 @@ jobs:
           body="${body//$'\n'/'%0A'}"
           body="${body//$'\r'/'%0D'}"
           echo "::set-output name=body::$body"
+      - name: Find Comment
+        id: fc
+        uses: peter-evans/github-comment@v2
+        with:
+          issue-number: $${{ github.even.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Lint results
       - name: Write comment
         uses: peter-evans/create-or-update-comment@v2
         with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             ## Lint results
