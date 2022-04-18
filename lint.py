@@ -39,7 +39,7 @@ with open(OUTPUT_FILE, "w") as f:
         for message in ERROR_MESSAGES:
             f.write(message + "\n")
     else:
-        f.write("No errors found :green_circle:\n")
+        f.write("### No errors found! :tada:\n")
     if WARNING_MESSAGES:
         f.write("\n### Warnings :warning:\n")
         for message in WARNING_MESSAGES:
