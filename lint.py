@@ -7,7 +7,7 @@ WARNING_THRESHOLD = 864000
 EXIT_CODE = 0
 ERROR_MESSAGES = []
 WARNING_MESSAGES = []
-OUTPUT_FILE = output.txt
+OUTPUT_FILE = "output.txt"
 
 # recursively find all .conf files in the app directory
 config_files = []
