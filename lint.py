@@ -33,7 +33,7 @@ for file in config_files:
 
 if EXIT_CODE > 0:
     print(
-        f"::error:{len(ERROR_MESSAGES)} {'error' if len(ERROR_MESAGES) == 1 else 'errors'} found"
+        f"::error:{len(ERROR_MESSAGES)} {'error' if len(ERROR_MESSAGES) == 1 else 'errors'} found"
     )
     for message in ERROR_MESSAGES:
         print(f"::error::{message}")
