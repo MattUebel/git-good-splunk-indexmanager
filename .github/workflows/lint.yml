@@ -1,11 +1,11 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy
+name: Lint
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
+  pull_request:
     branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -19,12 +19,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.8"
+          cache: 'pipenv'
+      - run: python --version
 
       # Runs a set of commands using the runners shell
-      - name: Stage new config and deploy
+      - name: Lint config
         env:
           SPLUNK_PASS: ${{ secrets.SPLUNK_PASS }}
         run: |
-          sudo -u root /bin/bash -c "cd $GITHUB_WORKSPACE && ./link_new_apps.sh"
-          sudo -u splunk /opt/splunk/bin/splunk apply cluster-bundle -auth admin:$SPLUNK_PASS
-          sudo -u splunk /opt/splunk/bin/splunk show cluster-bundle-status -auth admin:$SPLUNK_PASS
+          pipenv run python lint.py
+          
+          
