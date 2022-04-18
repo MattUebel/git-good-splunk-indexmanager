@@ -24,21 +24,23 @@ for file in config_files:
             frozenTimePeriodInSecs = config.getint(section, "frozenTimePeriodInSecs")
             if frozenTimePeriodInSecs < ALERT_THRESHOLD:
                 ERROR_MESSAGES.append(
-                    f"{file} has a frozenTimePeriodInSecs of {frozenTimePeriodInSecs} which is less than the required value of {ALERT_THRESHOLD}"
+                    f"`{file}` has a frozenTimePeriodInSecs of `{frozenTimePeriodInSecs}` which is less than the required value of `{ALERT_THRESHOLD}`"
                 )
                 EXIT_CODE += 1
             elif frozenTimePeriodInSecs < WARNING_THRESHOLD:
                 WARNING_MESSAGES.append(
-                    f"{file} has a frozenTimePeriodInSecs of {frozenTimePeriodInSecs} which is less than the recommended value of {WARNING_THRESHOLD}"
+                    f"`{file}` has a frozenTimePeriodInSecs of `{frozenTimePeriodInSecs}` which is less than the recommended value of `{WARNING_THRESHOLD}`"
                 )
 
 with open(OUTPUT_FILE, "w") as f:
     if ERROR_MESSAGES:
         print(f"::set-output name=status::failure")
+        f.write("### Errors :red_circle:\n")
         for message in ERROR_MESSAGES:
             f.write(message + "\n")
     else:
-        f.write("No errors found\n")
+        f.write("No errors found :green_circle:\n")
     if WARNING_MESSAGES:
+        f.write("\n### Warnings :warning:\n")
         for message in WARNING_MESSAGES:
             f.write(message + "\n")
