@@ -34,6 +34,7 @@ for file in config_files:
 
 with open(OUTPUT_FILE, "w") as f:
     if ERROR_MESSAGES:
+        print(f"::set-output name=status::failure")
         for message in ERROR_MESSAGES:
             f.write(message + "\n")
     else:
@@ -41,5 +42,3 @@ with open(OUTPUT_FILE, "w") as f:
     if WARNING_MESSAGES:
         for message in WARNING_MESSAGES:
             f.write(message + "\n")
-
-sys.exit(EXIT_CODE)
