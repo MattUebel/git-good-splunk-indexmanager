@@ -8,7 +8,6 @@ ERROR_MESSAGES = []
 WARNING_MESSAGES = []
 OUTPUT_FILE = "output.txt"
 
-# recursively find all .conf files in the app directory
 config_files = []
 for root, dirs, files in os.walk("."):
     for file in files:
