@@ -35,11 +35,11 @@ for file in config_files:
 with open(OUTPUT_FILE, "w") as f:
     if ERROR_MESSAGES:
         for message in ERROR_MESSAGES:
-            file.write(message + "\n")
+            f.write(message + "\n")
     else:
-        file.write("No errors found\n")
+        f.write("No errors found\n")
     if WARNING_MESSAGES:
         for message in WARNING_MESSAGES:
-            file.write(message + "\n")
+            f.write(message + "\n")
 
 sys.exit(EXIT_CODE)
